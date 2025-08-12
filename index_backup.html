@@ -1,0 +1,174 @@
+<!doctype html>
+
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Royal Carbon — Variasi Shop</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#ffcc00;--muted:#9aa4b2;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;background:linear-gradient(180deg,#071021 0%,#081224 60%);color:#e6eef6}
+    header{padding:20px 24px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#111827,#0ea5a3);display:flex;align-items:center;justify-content:center;font-weight:700}
+    h1{margin:0;font-size:18px}
+    .tag{color:var(--muted);font-size:13px}
+    main{padding:12px 20px 80px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .thumb{height:160px;border-radius:8px;background:linear-gradient(135deg,#0b1220,#071020);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+    .thumb svg{width:120px;height:120px;opacity:0.92}
+    .name{font-weight:700}
+    .price{color:var(--accent);font-weight:700;margin-top:6px}
+    .muted{color:var(--muted);font-size:13px}
+    select,input[type=number]{width:100%;padding:8px;margin-top:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.04);color:#e6eef6;border-radius:8px}
+    button{background:var(--accent);border:none;padding:10px 12px;border-radius:10px;font-weight:700;cursor:pointer}
+    .row{display:flex;gap:8px}
+    .cart-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:10px;color:var(--accent);cursor:pointer}
+    footer{position:fixed;right:18px;bottom:18px}
+    .cart-panel{position:fixed;right:18px;bottom:80px;width:380px;max-width:94vw;background:linear-gradient(180deg,#071025,#081428);border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    .cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .cart-empty{color:var(--muted);text-align:center;padding:18px}
+    .checkout{margin-top:12px;display:flex;gap:8px}
+    .note{font-size:13px;color:var(--muted);margin-top:8px}
+    @media (max-width:640px){header{padding:12px}main{padding:12px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">RC</div>
+      <div>
+        <h1>Royal Carbon — Variasi</h1>
+        <div class="tag">Shop template siap jualan — edit produk & harga</div>
+      </div>
+    </div>
+    <div>
+      <button class="cart-btn" id="openCart">🛒 Cart <span id="cartCount">(0)</span></button>
+    </div>
+  </header>  <main>
+    <section class="grid" id="products"></section>
+  </main>  <div id="cartPanel" class="cart-panel" style="display:none">
+    <h3>Keranjang</h3>
+    <div id="cartItems"></div>
+    <div id="cartSummary" style="margin-top:8px"></div>
+    <div class="checkout">
+      <button id="checkoutBtn">Checkout</button>
+      <button id="closeCart" class="cart-btn">Close</button>
+    </div>
+    <div class="note">Catatan: Ini template jualan. Hubungkan payment gateway / WhatsApp di langkah deploy.</div>
+  </div>  <footer>
+    <button id="addDemo" class="cart-btn">Add Demo Bundle</button>
+  </footer>  <script>
+    const products = [
+      { id: 'R-C-001', name: 'Carbon Kevlar 1x1 Twill', desc: 'Tampilan carbon glossy + kevlar amber. Cocok buat casing & aksesoris.', price: 450000, variants: [{k:'Finish',v:['Gloss','Matte']},{k:'Weave',v:['1x1','2x2']}]},
+      { id: 'R-C-002', name: 'Kevlar Gold Weave', desc: 'Kevlar premium, kuat & ringan. Estetika emas yang nge-blend.', price: 525000, variants: [{k:'Color',v:['Gold','Black']},{k:'Size',v:['Small','Large']}]},
+      { id: 'R-C-003', name: 'Hybrid Carbon-Kevlar', desc: 'Perpaduan serat carbon & kevlar untuk performa maksimal.', price: 780000, variants: [{k:'Laminate',v:['Single','Double']}]}
+    ];
+
+    const state = { cart: {} };
+
+    function formatIDR(n){ return n.toLocaleString('id-ID', {style:'currency',currency:'IDR',maximumFractionDigits:0}) }
+
+    function renderProducts(){
+      const el = document.getElementById('products'); el.innerHTML='';
+      products.forEach(p=>{
+        const c = document.createElement('div'); c.className='card';
+        c.innerHTML = `
+          <div class="thumb">${svgPlaceholder()}</div>
+          <div class="name">${p.name}</div>
+          <div class="muted">${p.desc}</div>
+          <div class="price">${formatIDR(p.price)}</div>
+          <div style="margin-top:8px">${p.variants.map(v=>`<label style=\"display:block;font-size:13px;margin-top:8px\">${v.k}</label><select data-vid=\"${p.id}\" data-key=\"${v.k}\">${v.v.map(opt=>`<option>${opt}</option>`).join('')}</select>`).join('')}</div>
+          <div class="row" style="margin-top:10px"><input type="number" min="1" value="1" data-qty="${p.id}"><button data-add="${p.id}">Add</button></div>
+        `;
+        el.appendChild(c);
+      });
+    }
+
+    function svgPlaceholder(){
+      return `
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="8" fill="#071021"/>
+          <path d="M8 44c8-8 16-16 32-16" stroke="#0ea5a3" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <text x="50%" y="52%" text-anchor="middle" fill="#9aa4b2" font-size="8">ROYAL</text>
+        </svg>`
+    }
+
+    function addToCart(id, qty=1, opts={}){
+      if(!state.cart[id]) state.cart[id]={qty:0,opts};
+      state.cart[id].qty += qty;
+      updateCartUI();
+    }
+
+    function updateCartUI(){
+      const count = Object.values(state.cart).reduce((s,i)=>s+i.qty,0);
+      document.getElementById('cartCount').innerText = `(${count})`;
+      const itemsEl = document.getElementById('cartItems'); itemsEl.innerHTML='';
+      if(count===0){ itemsEl.innerHTML=`<div class="cart-empty">Keranjang kosong. Tambah produk dulu geng.</div>`; document.getElementById('cartSummary').innerText=''; return }
+      let total = 0;
+      for(const id in state.cart){
+        const p = products.find(x=>x.id===id);
+        const it = state.cart[id];
+        const row = document.createElement('div'); row.className='cart-item';
+        row.innerHTML = `
+          <div style="flex:1">
+            <div style="font-weight:700">${p.name}</div>
+            <div class="muted">${it.qty} x ${formatIDR(p.price)}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:700">${formatIDR(p.price*it.qty)}</div>
+            <div style="margin-top:6px"><button data-rm="${id}" class="cart-btn">Remove</button></div>
+          </div>
+        `;
+        itemsEl.appendChild(row);
+        total += p.price * it.qty;
+      }
+      document.getElementById('cartSummary').innerHTML = `<div style="font-weight:800;margin-top:8px">Total: ${formatIDR(total)}</div>`;
+    }
+
+    document.addEventListener('click', e=>{
+      if(e.target.matches('[data-add]')){
+        const id = e.target.getAttribute('data-add');
+        const qtyInput = document.querySelector(`input[data-qty="${id}"]`);
+        const qty = parseInt(qtyInput.value || '1',10);
+        const selects = document.querySelectorAll(`select[data-vid="${id}"]`);
+        const opts = {};
+        selects.forEach(s=>opts[s.dataset.key]=s.value);
+        addToCart(id, qty, opts);
+      }
+      if(e.target.matches('#openCart')){
+        document.getElementById('cartPanel').style.display='block';
+      }
+      if(e.target.matches('#closeCart')){
+        document.getElementById('cartPanel').style.display='none';
+      }
+      if(e.target.matches('[data-rm]')){
+        const id = e.target.getAttribute('data-rm'); delete state.cart[id]; updateCartUI();
+      }
+      if(e.target.matches('#addDemo')){
+        addToCart('R-C-001',1); addToCart('R-C-002',1); document.getElementById('cartPanel').style.display='block';
+      }
+      if(e.target.matches('#checkoutBtn')){
+        const count = Object.values(state.cart).reduce((s,i)=>s+i.qty,0);
+        if(count===0){ alert('Keranjang kosong bro. Tambahin produk dulu.'); return }
+        const name = prompt('Nama pembeli (untuk pesanan)'); if(!name) return;
+        const phone = prompt('Nomor WhatsApp (contoh: 62812xxxx)'); if(!phone) return;
+        let msg = `Order%20dari%20website%20Royal%20Carbon%0A%0ANama:%20${encodeURIComponent(name)}%0A%0AProducts:%0A`;
+        let total = 0;
+        for(const id in state.cart){
+          const p = products.find(x=>x.id===id);
+          const it = state.cart[id];
+          msg += `${encodeURIComponent(p.name)}%20x${it.qty}%0A`;
+          total += p.price * it.qty;
+        }
+        msg += `%0ATotal:%20${encodeURIComponent(formatIDR(total))}%0A`;
+        const waLink = `https://wa.me/${phone}?text=${msg}`;
+        if(confirm('Buka WhatsApp untuk kirim pesanan?')) window.open(waLink,'_blank');
+      }
+    });
+
+    renderProducts(); updateCartUI();
+  </script></body>
+</html>

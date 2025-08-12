@@ -1,98 +1,81 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FaiberBlack — Variasi Carbon Kevlar</title>
-  <style>
-    :root{
-      --bg1:#000000;
-      --bg2:#ff0000;
-      --bg3:#ffffff;
-      --card: rgba(26,26,26,0.85);
-      --tokped: #03ac0e;
-      --shopee: #ee4d2d;
-      --text: #ffffff;
-    }
-    *{box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));color:var(--text)}
-    header{background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);padding:18px 16px;text-align:center}
-    header h1{margin:0;font-size:20px;letter-spacing:0.6px}
-    header p{margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.85)}
-    .container{max-width:900px;margin:18px auto;padding:0 12px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.03)}
-    .product-image {
-      width: 100%;
-      aspect-ratio: 1 / 1; /* bikin kotak 1:1 */
-      object-fit: cover; /* potong tengah biar rapi */
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-    .title{font-weight:800;margin:0 0 6px;font-size:16px}
-    .desc{color:#dfe7ef;font-size:13px;margin:0 0 8px}
-    .price{font-weight:800;margin:6px 0 12px;color:var(--text)}
-    .btns{display:flex;flex-wrap:wrap;gap:8px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 12px;border-radius:8px;text-decoration:none;color:#fff;font-weight:700;
-      min-width:170px;box-shadow:0 6px 18px rgba(0,0,0,0.35)
-    }
-    .tokped{background:var(--tokped)}
-    .shopee{background:var(--shopee)}
-    .btn small{display:block;font-weight:600;font-size:13px;opacity:0.98}
-    .note{font-size:12px;color:rgba(255,255,255,0.8);margin-top:10px;text-align:center}
-    @media (max-width:420px){
-      .btn{min-width:140px;padding:9px 10px}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Carbon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #660000, #000000);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+        .card {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .card img {
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Biar 1×1 */
+            object-fit: cover; /* Biar gambar pas kotak */
+        }
+        .card-body {
+            padding: 15px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .tokopedia {
+            background: green;
+        }
+        .shopee {
+            background: orangered;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>FaiberBlack</h1>
-    <p>Variasi Carbon Kevlar — Official Store</p>
-  </header>
 
-  <div class="container">
-    <div class="grid">
-      <!-- Product 1 -->
-      <div class="card">
-        <img src="https://images.tokopedia.net/img/cache/700/VqbcmM/2023/2/26/0cff52de-cda6-4b4e-8bb7-e59cdb0edf48.jpg" alt="Cover airscoop fairing zx25r" class="product-image">
-        <h2 class="title">Cover airscoop fairing zx25r</h2>
-        <p class="desc">Cover airscoop fairing zx25r carbon kevlar motif twill</p>
-        <div class="price">Tokopedia: Rp390.000 • Shopee: Rp405.000</div>
-        <div class="btns">
-          <a class="btn tokped" href="https://tk.tokopedia.com/ZSS7EbSS1/" target="_blank" rel="noopener">
-            <span>Beli di Tokopedia</span>
-            <small style="margin-left:8px">Rp390.000</small>
-          </a>
-          <a class="btn shopee" href="https://id.shp.ee/TCZhFz8" target="_blank" rel="noopener">
-            <span>Beli di Shopee</span>
-            <small style="margin-left:8px">Rp405.000</small>
-          </a>
+<div class="container">
+    <div class="card">
+        <img src="https://images.tokopedia.net/img/cache/700/VqbcmM/2023/2/26/0cff52de-cda6-4b4e-8bb7-e59cdb0edf48.jpg" alt="Cover airscoop fairing zx25r">
+        <div class="card-body">
+            <h3>Cover airscoop fairing zx25r</h3>
+            <p>Cover airscoop fairing zx25r carbon kevlar motif twill</p>
+            <p>Tokopedia: Rp390.000 · Shopee: Rp405.000</p>
+            <a class="btn tokopedia" href="#">Beli di Tokopedia Rp390.000</a>
+            <a class="btn shopee" href="#">Beli di Shopee Rp405.000</a>
         </div>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="card">
-        <img src="https://images.tokopedia.net/img/cache/700/VqbcmM/2023/9/23/3016d123-3314-4f69-a723-a58c486a9fac.jpg" alt="Cover stop lamp zx25r" class="product-image">
-        <h2 class="title">Cover stop lamp zx25r</h2>
-        <p class="desc">Cover stop lamp zx25r lampu belakang carbon kevlar asli</p>
-        <div class="price">Tokopedia: Rp264.000 • Shopee: Rp225.000</div>
-        <div class="btns">
-          <a class="btn tokped" href="https://tk.tokopedia.com/ZSS7o5B78/" target="_blank" rel="noopener">
-            <span>Beli di Tokopedia</span>
-            <small style="margin-left:8px">Rp264.000</small>
-          </a>
-          <a class="btn shopee" href="https://id.shp.ee/J9WD42c" target="_blank" rel="noopener">
-            <span>Beli di Shopee</span>
-            <small style="margin-left:8px">Rp225.000</small>
-          </a>
-        </div>
-      </div>
     </div>
 
-    <div class="note">Klik tombol sesuai marketplace untuk lanjut ke halaman checkout resmi.</div>
-  </div>
+    <div class="card">
+        <img src="https://images.tokopedia.net/img/cache/700/VqbcmM/2023/2/26/0cff52de-cda6-4b4e-8bb7-e59cdb0edf48.jpg" alt="Cover stop lamp zx25r">
+        <div class="card-body">
+            <h3>Cover stop lamp zx25r</h3>
+            <p>Cover stop lamp zx25r lampu belakang carbon kevlar asli</p>
+            <p>Tokopedia: Rp264.000 · Shopee: Rp225.000</p>
+            <a class="btn tokopedia" href="#">Beli di Tokopedia Rp264.000</a>
+            <a class="btn shopee" href="#">Beli di Shopee Rp225.000</a>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

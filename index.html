@@ -22,7 +22,8 @@
     .container{max-width:900px;margin:18px auto;padding:0 12px}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
     .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.03)}
-    .thumb{height:180px;border-radius:8px;background:linear-gradient(135deg,#0b0b0b,#171717);display:flex;align-items:center;justify-content:center;color:#9aa4b2;font-weight:700;margin-bottom:10px}
+    .thumb{height:180px;border-radius:8px;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
     .title{font-weight:800;margin:0 0 6px;font-size:16px}
     .desc{color:#dfe7ef;font-size:13px;margin:0 0 8px}
     .price{font-weight:800;margin:6px 0 12px;color:var(--text)}
@@ -52,36 +53,40 @@
     <div class="grid">
       <!-- Product 1 -->
       <div class="card">
-        <div class="thumb">Foto Product 1 (opsional)</div>
+        <div class="thumb">
+          <img src="https://images.tokopedia.net/img/cache/700/VqbcmM/2023/2/26/0cff52de-cda6-4b4e-8bb7-e59cdb0edf48.jpg" alt="Cover airscoop fairing zx25r" loading="lazy">
+        </div>
         <h2 class="title">Cover airscoop fairing zx25r</h2>
         <p class="desc">Cover airscoop fairing zx25r carbon kevlar motif twill</p>
         <div class="price">Tokopedia: Rp390.000 • Shopee: Rp405.000</div>
         <div class="btns">
           <a class="btn tokped" href="https://tk.tokopedia.com/ZSS7EbSS1/" target="_blank" rel="noopener">
             <span>Beli di Tokopedia</span>
-            <small style="margin-left:8px">Rp390.000</small>
+            <small>Rp390.000</small>
           </a>
           <a class="btn shopee" href="https://id.shp.ee/TCZhFz8" target="_blank" rel="noopener">
             <span>Beli di Shopee</span>
-            <small style="margin-left:8px">Rp405.000</small>
+            <small>Rp405.000</small>
           </a>
         </div>
       </div>
 
       <!-- Product 2 -->
       <div class="card">
-        <div class="thumb">Foto Product 2 (opsional)</div>
+        <div class="thumb">
+          <img src="https://images.tokopedia.net/img/cache/700/VqbcmM/2023/9/23/3016d123-3314-4f69-a723-a58c486a9fac.jpg" alt="Cover stop lamp zx25r" loading="lazy">
+        </div>
         <h2 class="title">Cover stop lamp zx25r</h2>
         <p class="desc">Cover stop lamp zx25r lampu belakang carbon kevlar asli</p>
         <div class="price">Tokopedia: Rp264.000 • Shopee: Rp225.000</div>
         <div class="btns">
           <a class="btn tokped" href="https://tk.tokopedia.com/ZSS7o5B78/" target="_blank" rel="noopener">
             <span>Beli di Tokopedia</span>
-            <small style="margin-left:8px">Rp264.000</small>
+            <small>Rp264.000</small>
           </a>
           <a class="btn shopee" href="https://id.shp.ee/J9WD42c" target="_blank" rel="noopener">
             <span>Beli di Shopee</span>
-            <small style="margin-left:8px">Rp225.000</small>
+            <small>Rp225.000</small>
           </a>
         </div>
       </div>
